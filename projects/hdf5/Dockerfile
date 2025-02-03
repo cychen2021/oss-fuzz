@@ -17,6 +17,8 @@
 FROM gcr.io/oss-fuzz-base/base-builder
 RUN apt-get update && apt-get install -y make autoconf automake libtool \
   pkg-config cmake zlib1g-dev
-RUN git clone --depth 1 https://github.com/HDFGroup/hdf5
-WORKDIR hdf5
+WORKDIR $SRC
+RUN git clone https://github.com/HDFGroup/hdf5
+WORKDIR $SRC/hdf5
+RUN git checkout d84337ad
 COPY build.sh *.c $SRC/
